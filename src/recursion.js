@@ -448,6 +448,17 @@ var minimizeZeroes = function (array) {
 // alternateSign([2,7,8,3,1,4]) // [2,-7,8,-3,1,-4]
 // alternateSign([-2,-7,8,3,-1,4]) // [2,-7,8,-3,1,-4]
 var alternateSign = function (array) {
+    if (array.length === 0) {
+        return [];
+    }
+
+    var prefix = [Math.abs(array[0])];
+
+    if (array.length === 1) {
+        return prefix;
+    }
+
+    return prefix.concat(alternateSign(array.slice(1)));
 };
 
 // 36. Given a string, return a string with digits converted to their word equivalent.
@@ -547,5 +558,21 @@ var mergeSort = function (array) {
 // console.log(obj2); // {a:1,b:{bb:{bbb:2}},c:3}
 // obj1 === obj2 // false
 var clone = function (input) {
+    if (Array.isArray(input)) {
+        var output = [];
+        for (var i = 0; i < input.length; i++) {
+            output[i] = clone(input[i]);
+        }
 
+        return output;
+    } else if (typeof input === 'object') {
+        var output = {};
+        for (k in input) {
+            output[k] = clone(input[k]);
+        }
+
+        return output;
+    } else {
+        return input;
+    }
 };
