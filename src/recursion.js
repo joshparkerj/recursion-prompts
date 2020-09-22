@@ -66,28 +66,22 @@ var sumBelow = function (n) {
     if (n === 0) {
         return n;
     } else if (n < 0) {
-        return n + sumBelow(n + 1);
+        return n + sumBelow(n + 1) + 1;
     } else if (n > 0) {
-        return n + sumBelow(n - 1);
+        return n + sumBelow(n - 1) - 1;
     }
 };
 
 // 6. Get the integers within a range (x, y).
 // range(2,9); // [3,4,5,6,7,8]
 var range = function (x, y) {
-    if (x >= y - 1 && x <= y + 1) {
+    if (x + 1 >= y && x - 1 <= y) {
         return [];
-    } else if (x < y - 1 && x >= y - 2) {
-        return [x + 1];
-    } else if (x > y + 1 && x <= y + 2) {
-        return [x - 1];
-    } else if (x < y - 2) {
-        return range(x, x + (y - x) / 2).concat(range(x + (y - x) / 2, y));
-    } else if (x > y + 2) {
-        return range(x - (x - y) / 2, y).concat(range(x, x - (x - y) / 2));
+    } else if (x < y) {
+        return [x + 1].concat(range(x+1,y));
+    } else {
+        return [x - 1].concat(range(x-1,y));
     }
-
-
 };
 
 // 7. Compute the exponent of a number.
