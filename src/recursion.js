@@ -78,9 +78,9 @@ var range = function (x, y) {
     if (x + 1 >= y && x - 1 <= y) {
         return [];
     } else if (x < y) {
-        return [x + 1].concat(range(x+1,y));
+        return [x + 1].concat(range(x + 1, y));
     } else {
-        return [x - 1].concat(range(x-1,y));
+        return [x - 1].concat(range(x - 1, y));
     }
 };
 
@@ -173,8 +173,8 @@ var compareStr = function (str1, str2) {
     } else if (str1.length === 1) {
         return str1[0] === str2[0] && str2.length === 1;
     } else {
-        return compareStr(str1.slice(0,str1.length/2), str2.slice(0,str2.length/2)) && 
-               compareStr(str1.slice(str1.length / 2), str2.slice(str2.length / 2));
+        return compareStr(str1.slice(0, str1.length / 2), str2.slice(0, str2.length / 2)) &&
+            compareStr(str1.slice(str1.length / 2), str2.slice(str2.length / 2));
     }
 };
 
@@ -197,8 +197,8 @@ var reverseArr = function (array) {
     } else if (array.length === 1) {
         return [array[0]];
     } else {
-        return reverseArr(array.slice(array.length/2))
-        .concat(reverseArr(array.slice(0, array.length/2)));
+        return reverseArr(array.slice(array.length / 2))
+            .concat(reverseArr(array.slice(0, array.length / 2)));
     }
 };
 
@@ -211,8 +211,8 @@ var buildList = function (value, length) {
     } else if (length === 1) {
         return [value];
     } else {
-        return buildList(value, Math.floor(length/2))
-        .concat(buildList(value, Math.ceil(length/2)));
+        return buildList(value, Math.floor(length / 2))
+            .concat(buildList(value, Math.ceil(length / 2)));
     }
 };
 
@@ -232,11 +232,11 @@ var fizzBuzz = function (n) {
     } else {
         var result = '';
         for (k in key) {
-            if (n%k === 0) {
+            if (n % k === 0) {
                 result += key[k];
             }
         }
-        return fizzBuzz(n-1).concat(result || String(n));
+        return fizzBuzz(n - 1).concat(result || String(n));
     }
 };
 
@@ -413,11 +413,11 @@ var letterTally = function (str, obj) {
         if (str in obj) {
             obj[str]++;
         } else {
-            obj[str]=1;
+            obj[str] = 1;
         }
     } else if (str.length > 1) {
-        letterTally(str.slice(0, str.length / 2),obj);
-        letterTally(str.slice(str.length / 2),obj);
+        letterTally(str.slice(0, str.length / 2), obj);
+        letterTally(str.slice(str.length / 2), obj);
     }
 
     return obj;
@@ -429,6 +429,15 @@ var letterTally = function (str, obj) {
 // compress([1,2,2,3,4,4,5,5,5]) // [1,2,3,4,5]
 // compress([1,2,2,3,4,4,2,5,5,5,4,4]) // [1,2,3,4,2,5,4]
 var compress = function (list) {
+    if (list.length < 2) {
+        return list;
+    }
+    var indexNext = list.findIndex(e => e != list[0]);
+    if (indexNext === -1) {
+        return [list[0]];
+    }
+
+    return [list[0]].concat(compress(list.slice(list.findIndex(e => e != list[0]))));
 };
 
 // 33. Augment every element in a list with a new value where each element is an array
@@ -446,7 +455,7 @@ var minimizeZeroes = function (array) {
     }
 
     if (array[0] === 0) {
-        return [0].concat(minimizeZeroes(array.slice(array.findIndex(e => e!= 0))));
+        return [0].concat(minimizeZeroes(array.slice(array.findIndex(e => e != 0))));
     } else {
         return [array[0]].concat(minimizeZeroes(array.slice(1)));
     }
