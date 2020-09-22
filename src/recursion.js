@@ -168,6 +168,14 @@ var gcd = function (x, y) {
 // compareStr('house', 'houses') // false
 // compareStr('tomato', 'tomato') // true
 var compareStr = function (str1, str2) {
+    if (str1.length === 0) {
+        return str2.length === 0;
+    } else if (str1.length === 1) {
+        return str1[0] === str2[0] && str2.length === 1;
+    } else {
+        return compareStr(str1.slice(0,str1.length/2), str2.slice(0,str2.length/2)) && 
+               compareStr(str1.slice(str1.length / 2), str2.slice(str2.length / 2));
+    }
 };
 
 // 16. Write a function that accepts a string and creates an array where each letter
@@ -184,6 +192,14 @@ var createArray = function (str) {
 
 // 17. Reverse the order of an array
 var reverseArr = function (array) {
+    if (array.length === 0) {
+        return [];
+    } else if (array.length === 1) {
+        return [array[0]];
+    } else {
+        return reverseArr(array.slice(array.length/2))
+        .concat(reverseArr(array.slice(0, array.length/2)));
+    }
 };
 
 // 18. Create a new array with a given value and length.
