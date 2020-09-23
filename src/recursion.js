@@ -584,13 +584,7 @@ var alternateSign = function (array) {
         return [];
     }
 
-    var prefix = [Math.abs(array[0])];
-
-    if (array.length === 1) {
-        return prefix;
-    }
-
-    return prefix.concat(alternateSign(array.slice(1)));
+    return [Math.abs(array[0])].concat(alternateSign(array.slice(1)).map(e => -e));
 };
 
 // 36. Given a string, return a string with digits converted to their word equivalent.
