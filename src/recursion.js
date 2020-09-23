@@ -147,8 +147,17 @@ var modulo = function (x, y) {
 // 12. Write a function that multiplies two numbers without using the * operator or
 // Math methods.
 var multiply = function (x, y) {
-    if (true) {
-
+    if (y > x) {
+        return multiply(y, x);
+    }
+    if (y === 1) {
+        return x;
+    }
+    if (y > 1) {
+        return x + multiply(x, y - 1);
+    }
+    if (y < 1) {
+        return multiply(x, y + 1) - x;
     }
 };
 
