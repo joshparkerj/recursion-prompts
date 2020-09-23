@@ -96,7 +96,7 @@ var exponent = function (base, exp) {
     if (exp === 1) {
         return base;
     } if (exp > 1) {
-        return base * exponent(base, exp -1);
+        return base * exponent(base, exp - 1);
     }
 
     return 1 / exponent(base, -exp);
@@ -142,7 +142,19 @@ var palindrome = function (string) {
 // modulo(17,5) // 2
 // modulo(22,6) // 4
 var modulo = function (x, y) {
-    if (x < y) {
+    if (y === 0) {
+        return NaN;
+    }
+
+    if (y < 0) {
+        return modulo(x, -y);
+    }
+
+    if (x < 0) {
+        return -modulo(-x, y);
+    }
+
+    if (y > x) {
         return x;
     }
 
@@ -188,8 +200,6 @@ var divide = function (x, y) {
 
         return 1 + divide(x + y, y);
     }
-
-
 };
 
 // 14. Find the greatest common divisor (gcd) of two positive numbers. The GCD of two
@@ -386,10 +396,10 @@ var fibonacci = function (n) {
     if (n < 1) {
         return null;
     } else if (n === 1) {
-        return [0,1];
+        return [0, 1];
     } else {
-        var prefix = fibonacci(n-1);
-        return prefix.concat([prefix[prefix.length-2] + prefix[prefix.length-1]]);
+        var prefix = fibonacci(n - 1);
+        return prefix.concat([prefix[prefix.length - 2] + prefix[prefix.length - 1]]);
     }
 };
 
@@ -409,7 +419,7 @@ var nthFibo = function (n) {
         return 1;
     }
 
-    return nthFibo(n-1) + nthFibo(n-2);
+    return nthFibo(n - 1) + nthFibo(n - 2);
 };
 
 // 27. Given an array of words, return a new array containing each word capitalized.
