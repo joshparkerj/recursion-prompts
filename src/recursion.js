@@ -122,7 +122,7 @@ var reverse = function (string) {
 
 // 10. Write a function that determines if a string is a palindrome.
 var palindrome = function (string) {
-    string = string.replace(/\W/gi,'').toLowerCase();
+    string = string.replace(/\W/gi, '').toLowerCase();
 
     if (string.length < 2) {
         return true;
@@ -173,7 +173,7 @@ var divide = function (x, y) {
             return 0;
         }
 
-        return 1 + divide(x-y,y);
+        return 1 + divide(x - y, y);
     }
 
     if (y < 0) {
@@ -181,7 +181,7 @@ var divide = function (x, y) {
             return 0;
         }
 
-        return 1 + divide(x+y,y);
+        return 1 + divide(x + y, y);
     }
 
 
@@ -193,6 +193,16 @@ var divide = function (x, y) {
 // http://www.cse.wustl.edu/~kjg/cse131/Notes/Recursion/recursion.html
 // https://www.khanacademy.org/computing/computer-science/cryptography/modarithmetic/a/the-euclidean-algorithm
 var gcd = function (x, y) {
+    if (0 > x || 0 > y) {
+        return null;
+    }
+    if (x > y) {
+        return gcd(y, x);
+    }
+    if (y % x === 0) {
+        return x;
+    }
+    return gcd(y % x, x);
 };
 
 // 15. Write a function that compares each character of two strings and returns true if
@@ -388,8 +398,8 @@ var capitalizeWords = function (array) {
         } else if (array.length === 1) {
             return capitalizeWords(array[0]);
         } else {
-            return capitalizeWords(array.slice(0,array.length/2))
-            .concat(capitalizeWords(array.slice(array.length/2)));
+            return capitalizeWords(array.slice(0, array.length / 2))
+                .concat(capitalizeWords(array.slice(array.length / 2)));
         }
     } else {
         return [array.toUpperCase()];
@@ -405,8 +415,8 @@ var capitalizeFirst = function (array) {
         } else if (array.length === 1) {
             return capitalizeFirst(array[0]);
         } else {
-            return capitalizeFirst(array.slice(0,array.length/2))
-            .concat(capitalizeFirst(array.slice(array.length/2)));
+            return capitalizeFirst(array.slice(0, array.length / 2))
+                .concat(capitalizeFirst(array.slice(array.length / 2)));
         }
     } else {
         return [`${array[0].toUpperCase()}${array.slice(1)}`];
